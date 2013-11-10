@@ -5,14 +5,14 @@ module SocialShareButton
       extra_data = {}
       rel = opts[:rel]
       html = []
-      html << "<div class='social-share-button' data-title='#{h title}' data-img='#{opts[:image]}' data-url='#{opts[:url]}' data-appkey='#{opts[:appkey]}'>"
+      html << "<div class='social-share-button' data-title='#{h title}' data-img='#{opts[:image]}' data-url='#{opts[:url]}'>"
       
-      SocialShareButton.config.allow_sites.each do |name|
+      SocialShareButton.config.allow_sites.each do |name, appkey|
         extra_data = opts.select { |k, _| k.to_s.start_with?('data') } if name.eql?('tumblr')
-
         link_title = t "social_share_button.share_to", :name => t("social_share_button.#{name.downcase}")
         html << link_to("","#", {:rel => ["nofollow", rel],
                                   "data-site" => name,
+                                  "data-appkey" => appkey,
                                   :class => "social-share-button-#{name}",
                                   :onclick => "return SocialShareButton.share(this);",
                                   :title => h(link_title)}.merge(extra_data))

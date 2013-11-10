@@ -8,13 +8,14 @@ window.SocialShareButton =
     title = encodeURIComponent($(el).parent().data('title') || '')
     img = encodeURIComponent($(el).parent().data("img") || '')
     url = encodeURIComponent($(el).parent().data("url") || '')
+    appkey = encodeURIComponent($(el).data("appkey") || '')
     if url.length == 0
       url = encodeURIComponent(location.href)
     switch site
       when "email"
         location.href = "mailto:?to=&subject=#{title}&body=#{url}"
       when "weibo"
-        SocialShareButton.openUrl("http://service.weibo.com/share/share.php?url=#{url}&type=3&pic=#{img}&title=#{title}")
+        SocialShareButton.openUrl("http://service.weibo.com/share/share.php?url=#{url}&type=3&pic=#{img}&title=#{title}&appkey=#{appkey}")
       when "twitter"
         SocialShareButton.openUrl("https://twitter.com/home?status=#{title}: #{url}")
       when "douban"
@@ -24,7 +25,7 @@ window.SocialShareButton =
       when "qq"
         SocialShareButton.openUrl("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=#{url}&title=#{title}&pics=#{img}")
       when "tqq"
-        SocialShareButton.openUrl("http://share.v.t.qq.com/index.php?c=share&a=index&url=#{url}&title=#{title}&pic=#{img}")
+        SocialShareButton.openUrl("http://share.v.t.qq.com/index.php?c=share&a=index&url=#{url}&title=#{title}&pic=#{img}&appkey=#{appkey}")
       when "baidu"
         SocialShareButton.openUrl("http://hi.baidu.com/pub/show/share?url=#{url}&title=#{title}&content=")
       when "kaixin001"
